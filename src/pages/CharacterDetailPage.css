@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(142, 184, 225);
+}
+
+.character-detail {
+  margin: 20px 0;
+  width: 90%;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.character-image {
+  width: 100%;
+  max-height: 300px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.character-info {
+  margin-top: 20px;
+}
+.character_title {
+  font-size: 30px;
+  font-family: fantasy;
+  font-weight: bolder;
+}
+
+.character-info p {
+  margin: 10px 0;
+  font-size: 25px;
+  font-family: fantasy;
+  font-weight: bold;
+}
+
+.episodes-list {
+  list-style: decimal-leading-zero;
+  padding-left: 25px;
+  font-size: 20px;
+  font-family: fantasy;
+}
+
+.episodes-list-item {
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .character_title {
+    font-size: 20px;
+  }
+  .character-info p {
+    font-size: 18px;
+  }
+  .episodes-list {
+    font-size: 15px;
+  }
+  .character-detail {
+    width: 80%;
+  }
+}

@@ -1,0 +1,51 @@
+.main_container {
+  padding: 20px;
+}
+
+.container-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+}
+
+.search-input {
+  margin: 20px;
+  padding: 10px;
+  width: 180px;
+  background-color: snow;
+  border: 2px solid #000;
+  border-radius: 10px;
+}
+
+.episode-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.episode-card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.episode-card:hover {
+  background-color: black;
+  color: beige;
+  transform: scale(1.1);
+}
+
+.episode-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.pagination {
+  margin: 25px 0;
+}
+.pgvalue {
+  margin: 0 10px;
+}
