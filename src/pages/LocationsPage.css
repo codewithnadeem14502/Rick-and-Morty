@@ -45,3 +45,11 @@
 .pgvalue {
   margin: 0 10px;
 }
+.location-info {
+  display: flex;
+  font-family: fantasy;
+  gap: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(60, 60, 244);
+}

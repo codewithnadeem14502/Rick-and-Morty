@@ -12,7 +12,7 @@
   font-size: 24px;
 }
 
-.search-input {
+.esearch-input {
   margin: 20px;
   padding: 10px;
   width: 180px;
@@ -48,4 +48,11 @@
 }
 .pgvalue {
   margin: 0 10px;
+}
+.eimage {
+  width: 190px;
+  border-radius: 20px;
+}
+.subtitle {
+  color: rgb(60, 60, 244);
 }

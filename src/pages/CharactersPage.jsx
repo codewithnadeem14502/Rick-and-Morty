@@ -7,34 +7,27 @@ function CharactersPage() {
   const [characters, setCharacters] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
-  const [locationFilter, setLocationFilter] = useState("");
+
   const [genderFilter, setGenderFilter] = useState("");
   const [speciesFilter, setSpeciesFilter] = useState("");
-  const [episodeFilter, setEpisodeFilter] = useState("");
-  const [episodes, setEpisodes] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    fetchData();
+  }, [currentPage, searchTerm, statusFilter, genderFilter, speciesFilter]);
+
+  const fetchData = () => {
+    const apiUrl = `https://rickandmortyapi.com/api/character/?page=${currentPage}&name=${searchTerm}&status=${statusFilter}&gender=${genderFilter}&species=${speciesFilter}`;
     axios
-      .get(`https://rickandmortyapi.com/api/character?page=${currentPage}`)
+      .get(apiUrl)
       .then((response) => {
         setCharacters(response.data.results);
       })
       .catch((error) => {
         console.error("Error fetching characters:", error);
       });
-
-    // Fetch episodes
-    axios
-      .get(`https://rickandmortyapi.com/api/episode`)
-      .then((response) => {
-        setEpisodes(response.data.results);
-      })
-      .catch((error) => {
-        console.error("Error fetching episodes:", error);
-      });
-  }, [currentPage]);
+  };
 
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -44,47 +37,6 @@ function CharactersPage() {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-  };
-  //  filteredCharacters
-  const filteredCharacters = characters.filter((character) => {
-    const nameMatches = character.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const statusMatches =
-      character.status.toLowerCase().includes(statusFilter.toLowerCase()) ||
-      !statusFilter;
-    const locationMatches =
-      character.location.name
-        .toLowerCase()
-        .includes(locationFilter.toLowerCase()) || !locationFilter;
-    const genderMatches =
-      character.gender.toLowerCase() === genderFilter.toLowerCase() ||
-      !genderFilter;
-    const speciesMatches =
-      character.species.toLowerCase().includes(speciesFilter.toLowerCase()) ||
-      !speciesFilter;
-
-    // Check if any of the character's episodes match the searched episode
-    const episodeMatches =
-      !episodeFilter ||
-      episodes.some(
-        (episode) =>
-          character.episode.includes(episode.url) &&
-          episode.name.toLowerCase().includes(episodeFilter.toLowerCase())
-      );
-
-    return (
-      nameMatches &&
-      statusMatches &&
-      locationMatches &&
-      genderMatches &&
-      speciesMatches &&
-      episodeMatches
-    );
-  });
-
-  const handleEpisodeSearch = (e) => {
-    setEpisodeFilter(e.target.value);
   };
 
   return (
@@ -134,22 +86,8 @@ function CharactersPage() {
           <option value="cronenberg">Cronenberg</option>
           <option value="unknown">Unknown</option>
         </select>
-
-        <input
-          type="text"
-          className="search-filter"
-          placeholder="Filter by Location"
-          value={locationFilter}
-          onChange={(e) => setLocationFilter(e.target.value)}
-        />
-        <input
-          type="text"
-          className="search-filter"
-          placeholder="Filter by Episode"
-          value={episodeFilter}
-          onChange={handleEpisodeSearch}
-        />
       </div>
+
       <div className="middle_container">
         <div className="pg_container">
           <h1 className="pgno">Page no : {currentPage}</h1>
@@ -162,7 +100,7 @@ function CharactersPage() {
         </div>
       </div>
       <div className="character-container">
-        {filteredCharacters.map((character) => (
+        {characters.map((character) => (
           // redirecting to details pages
           <Link key={character.id} to={`/character/${character.id}`}>
             <div className="character-card">
